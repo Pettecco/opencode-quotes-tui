@@ -1,0 +1,32 @@
+{
+  "name": "opencode-quotes-tui",
+  "version": "0.1.0",
+  "description": "OpenCode TUI plugin that replaces the home screen tips with a random quote",
+  "type": "module",
+  "main": "./tui.tsx",
+  "exports": {
+    ".": "./tui.tsx"
+  },
+  "files": [
+    "tui.tsx",
+    "quotes.ts"
+  ],
+  "keywords": [
+    "opencode",
+    "opentui",
+    "tui",
+    "plugin",
+    "quotes"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@opencode-ai/plugin": "1.14.20",
+    "@opentui/core": "0.1.99",
+    "@opentui/solid": "0.1.99",
+    "solid-js": "^1.9.0",
+    "typescript": "^5.8.2"
+  }
+}

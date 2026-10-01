@@ -1,0 +1,3 @@
+node_modules/
+.opencode-tmp/
+*.log
