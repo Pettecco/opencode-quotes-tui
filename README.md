@@ -1,57 +1,81 @@
 # opencode-quotes-tui
 
-[OpenCode](https://opencode.ai) TUI plugin that replaces the home screen tips with a random quote from a local list.
+[![CI](https://github.com/Pettecco/opencode-quotes-tui/actions/workflows/ci.yml/badge.svg)](https://github.com/Pettecco/opencode-quotes-tui/actions/workflows/ci.yml)
+[![npm version](https://img.shields.io/npm/v/opencode-quotes-tui)](https://www.npmjs.com/package/opencode-quotes-tui)
 
-```text
-       OpenCode
+**Open your terminal to a piece of timeless wisdom.** opencode-quotes-tui replaces OpenCode's built-in tips with a hand-picked quote. You get a new one every time you start OpenCode.
 
-       "There is no substitute for hard work."
+![OpenCode TUI home screen with a random quote in the footer](assets/example.png)
 
-       Thomas Edison
-```
+## Why you'll like it
 
-## How it works
-
-The plugin registers a `home_footer` slot (rendered with `single_winner` mode) that displays one quote — quote in the theme's text color, author in the theme's primary color. It also sets the TUI kv key `tips_hidden` (the same mechanism as the built-in `tips.toggle` command), so the original tips don't show.
-
-A new quote is picked randomly (single `Math.random()` call) every time the TUI initializes.
+- **A fresh quote every session:** philosophy, literature, science, art. A hand-curated list instead of a wall of tips.
+- **Matches your theme:** renders in your current OpenCode theme's colors, with nothing to configure.
+- **One command to install:** works out of the box, globally, in every project.
 
 ## Install
 
-### Per project
+```bash
+opencode plugin opencode-quotes-tui -g
+```
 
-Copy `tui.tsx`, `quotes.ts` and `tui.json` to your project root. OpenCode picks up the `tui.json` `plugin` entry automatically.
+Restart OpenCode. That's it. Every session from now on opens with a quote.
 
-### Global
+<details>
+<summary>Alternative install routes</summary>
 
-1. Clone this repo somewhere (e.g. `~/.config/opencode/quotes-tui`)
-2. Point the global TUI config at the plugin file — `~/.config/opencode/tui.json`:
+**In-app Plugin Manager:** command palette → **Plugins** → **install** → type `opencode-quotes-tui` → press **Tab** to select global scope.
+
+**Manual config:** add the package to the plugin list in `~/.config/opencode/tui.json` and OpenCode downloads it automatically:
 
 ```json
 {
   "$schema": "https://opencode.ai/tui.json",
-  "plugin": ["/absolute/path/to/quotes-tui/tui.tsx"]
+  "plugin": ["opencode-quotes-tui"]
 }
 ```
 
-3. Restart OpenCode.
+Use `"opencode-quotes-tui@1.0.0"` to pin a version.
 
-## Customizing
+**Single project only:** copy `src/tui.tsx`, `src/quotes.ts` and `tui.json` from this repo into your project root and OpenCode picks them up automatically.
 
-Edit `quotes.ts` — a plain array of `{ quote, author }`. The plugin handles an empty array gracefully (nothing renders, no crash).
+</details>
 
-## Typechecking
+## Uninstall
+
+Remove `opencode-quotes-tui` from the plugin list in `~/.config/opencode/tui.json` and restart OpenCode.
+
+One honest note: while active, the plugin hides OpenCode's built-in tips, which is the point. That preference outlives the plugin, so if you want the tips back afterwards, run the built-in `tips.toggle` command once.
+
+## Make it yours
+
+The quote list is a plain file: `src/quotes.ts`, an array of `{ quote, author }`. Fork it, edit it, rebuild with `npm run build`. An empty list is fine too. The plugin simply steps aside.
+
+## Contributing a quote
+
+Pull requests with new quotes are welcome:
+
+- **Verifiable attribution:** cite the source or work in the PR; misattributed quotes are declined.
+- **Terminal-friendly:** around 200 characters max.
+- **Any language:** English and Portuguese today, more welcome.
+- **Fit the shelf:** keep the section organization of `src/quotes.ts`.
+
+## Compatibility
+
+OpenCode 1.18 or newer.
+
+<details>
+<summary>Development</summary>
 
 ```bash
 npm install
 npm run typecheck
+npm run build
 ```
 
-Requires `typescript` (dev dependency) plus `@opencode-ai/plugin` and `@opentui/*` type packages for full strict checks — OpenCode itself transpiles the plugin at load time, so none of these are needed to _run_ it.
+Plain Node 22 + npm, no extra runtime needed.
 
-## Status
-
-Experimental / private. Built against opencode 1.18.x (`@opencode-ai/plugin` 1.14+ TUI plugin API).
+</details>
 
 ## License
 
