@@ -1,32 +1,52 @@
 {
   "name": "opencode-quotes-tui",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "OpenCode TUI plugin that replaces the home screen tips with a random quote",
   "type": "module",
-  "main": "./tui.tsx",
+  "author": "Pettecco",
   "exports": {
-    ".": "./tui.tsx"
+    ".": "./dist/tui.js",
+    "./tui": "./dist/tui.js"
   },
   "files": [
-    "tui.tsx",
-    "quotes.ts"
+    "dist",
+    "assets"
   ],
   "keywords": [
     "opencode",
     "opentui",
     "tui",
     "plugin",
-    "quotes"
+    "quotes",
+    "opencode-plugin"
   ],
   "license": "MIT",
-  "scripts": {
-    "typecheck": "tsc --noEmit -p tsconfig.json"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pettecco/opencode-quotes-tui.git"
   },
-  "devDependencies": {
-    "@opencode-ai/plugin": "1.14.20",
+  "bugs": {
+    "url": "https://github.com/Pettecco/opencode-quotes-tui/issues"
+  },
+  "homepage": "https://github.com/Pettecco/opencode-quotes-tui#readme",
+  "engines": {
+    "opencode": ">=1.18 <2"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build": "node scripts/build.mjs",
+    "prepublishOnly": "npm run typecheck && npm run build"
+  },
+  "dependencies": {
     "@opentui/core": "0.1.99",
     "@opentui/solid": "0.1.99",
-    "solid-js": "^1.9.0",
+    "solid-js": "^1.9.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-typescript": "^7.27.1",
+    "@opencode-ai/plugin": "1.14.20",
+    "babel-preset-solid": "^1.9.10",
     "typescript": "^5.8.2"
   }
 }

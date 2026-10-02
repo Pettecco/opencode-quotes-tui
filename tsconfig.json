@@ -10,8 +10,5 @@
     "jsxImportSource": "@opentui/solid",
     "types": []
   },
-  "include": [
-    "./tui.tsx",
-    "./quotes.ts"
-  ]
+  "include": ["src"]
 }
